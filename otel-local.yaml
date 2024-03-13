@@ -1,0 +1,45 @@
+apiVersion: opentelemetry.io/v1alpha1
+kind: OpenTelemetryCollector
+metadata:
+  name: local
+spec:
+  mode: deployment
+  image: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib:0.95.0
+  volumes:
+    - name: logs
+  volumeMounts:
+    - mountPath: /tmp/rejekts-local
+      name: logs
+  observability:
+    metrics:
+      enableMetrics: true
+  config: |
+    # our local collector, under our control
+    extensions:
+      file_storage:
+        directory: /tmp/rejekts-local
+
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+
+    processors:
+      batch:
+
+    exporters:
+      otlp:
+        endpoint: backend-collector:5317
+        sending_queue:
+          storage: file_storage
+          queue_size: 600_000 # 1000 logs/sec, 600_000 for 10m
+        tls:
+          insecure: true
+
+    service:
+      extensions: [ file_storage ]
+      pipelines:
+        logs:
+          receivers: [otlp]
+          processors: [batch]
+          exporters: [otlp]

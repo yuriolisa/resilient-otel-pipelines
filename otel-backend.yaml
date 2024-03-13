@@ -1,0 +1,40 @@
+apiVersion: opentelemetry.io/v1alpha1
+kind: OpenTelemetryCollector
+metadata:
+  name: backend
+spec:
+  mode: deployment
+  image: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib:0.95.0
+  observability:
+    metrics:
+      enableMetrics: true
+  config: |
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+            endpoint: 0.0.0.0:5317
+
+    processors:
+      batch:
+
+    exporters:
+      debug:
+      loki:
+        endpoint: "http://loki.backend.svc.cluster.local:3100/loki/api/v1/push"
+
+    service:
+      pipelines:
+        traces:
+          receivers: [otlp]
+          processors: [batch]
+          exporters: [debug]
+        metrics:
+          receivers: [otlp]
+          processors: [batch]
+          exporters: [debug]
+        logs:
+          receivers: [otlp]
+          processors: [batch]
+          exporters: [loki]
+

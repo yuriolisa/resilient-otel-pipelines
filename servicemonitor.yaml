@@ -1,0 +1,39 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    release: prometheus
+  name: sm-local-collector
+  namespace: prometheus
+spec:
+  endpoints:
+  - port: monitoring
+    interval: 10s
+    path: /metrics
+  namespaceSelector:
+    matchNames:
+    - default
+  selector:
+    matchLabels:
+      app.kubernetes.io/managed-by: opentelemetry-operator
+      app.kubernetes.io/name: local-collector-monitoring
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    release: prometheus
+  name: sm-backend-collector
+  namespace: prometheus
+spec:
+  endpoints:
+  - port: monitoring
+    interval: 10s
+    path: /metrics
+  namespaceSelector:
+    matchNames:
+    - default
+  selector:
+    matchLabels:
+      app.kubernetes.io/managed-by: opentelemetry-operator
+      app.kubernetes.io/name: backend-collector-monitoring
