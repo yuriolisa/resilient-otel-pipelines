@@ -291,175 +291,25 @@ data:
           "type": "dashboard"
         }
       ]
-    },
-    "editable": true,
-    "fiscalYearStartMonth": 0,
-    "graphTooltip": 0,
-    "id": 4,
-    "links": [],
-    "liveNow": false,
-    "panels": [
-      {
-        "gridPos": {
-          "h": 1,
-          "w": 24,
-          "x": 0,
-          "y": 0
-        },
-        "id": 5,
-        "title": "Loki",
-        "type": "row"
       },
-      {
-        "datasource": {
-          "type": "loki",
-          "uid": "PEA2100DC89AE9FE2"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "blue",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 1200000
-                }
-              ]
-            },
-            "unitScale": true
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 9,
-          "w": 5,
-          "x": 0,
-          "y": 1
-        },
-        "id": 3,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showPercentChange": false,
-          "textMode": "auto",
-          "wideLayout": true
-        },
-        "pluginVersion": "10.3.4",
-        "targets": [
-          {
-            "datasource": {
-              "type": "loki",
-              "uid": "PEA2100DC89AE9FE2"
-            },
-            "editorMode": "builder",
-            "expr": "sum(rate({exporter=\"OTLP\"} |= `` [$__auto]))",
-            "queryType": "range",
-            "refId": "A"
-          }
-        ],
-        "title": "Logs Ingested - Last 15Min",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "PA58DA793C7250F1B"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "blue",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 1
-                }
-              ]
-            },
-            "unitScale": true
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 9,
-          "w": 5,
-          "x": 5,
-          "y": 1
-        },
-        "id": 6,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showPercentChange": false,
-          "textMode": "auto",
-          "wideLayout": true
-        },
-        "pluginVersion": "10.3.4",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "PA58DA793C7250F1B"
-            },
-            "disableTextWrap": false,
-            "editorMode": "builder",
-            "expr": "otelcol_exporter_send_failed_log_records{service=\"local-collector-monitoring\"}",
-            "fullMetaSearch": false,
-            "includeNullMetadata": true,
-            "legendFormat": "__auto",
-            "range": true,
-            "refId": "A",
-            "useBackend": false
-          }
-        ],
-        "title": "Send Failed Logs",
-        "type": "stat"
-      },
+      "editable": true,
+      "fiscalYearStartMonth": 0,
+      "graphTooltip": 0,
+      "id": 4,
+      "links": [],
+      "liveNow": false,
+      "panels": [
       {
         "collapsed": false,
         "gridPos": {
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 10
+          "y": 0
         },
         "id": 4,
         "panels": [],
-        "title": "OpenTelemetry Colllector",
+        "title": "OpenTelemetry Colllector Local",
         "type": "row"
       },
       {
@@ -495,10 +345,10 @@ data:
           "overrides": []
         },
         "gridPos": {
-          "h": 12,
+          "h": 8,
           "w": 5,
           "x": 0,
-          "y": 11
+          "y": 1
         },
         "id": 1,
         "options": {
@@ -525,8 +375,8 @@ data:
               "uid": "PA58DA793C7250F1B"
             },
             "disableTextWrap": false,
-            "editorMode": "builder",
-            "expr": "otelcol_exporter_queue_size{service=\"local-collector-monitoring\"}",
+            "editorMode": "code",
+            "expr": "sum by (service) (otelcol_exporter_queue_size{service=\"local-collector-monitoring\"})",
             "fullMetaSearch": false,
             "hide": false,
             "includeNullMetadata": true,
@@ -559,6 +409,219 @@ data:
                   "value": null
                 },
                 {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unitScale": true
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 6,
+          "x": 5,
+          "y": 1
+        },
+        "id": 7,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "10.3.4",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "PA58DA793C7250F1B"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "expr": "sum by (service) (otelcol_receiver_accepted_log_records{service=\"local-collector-monitoring\"})",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "A",
+            "useBackend": false
+          }
+        ],
+        "title": "Received",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "PA58DA793C7250F1B"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unitScale": true
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 6,
+          "x": 11,
+          "y": 1
+        },
+        "id": 8,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "10.3.4",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "PA58DA793C7250F1B"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "expr": "sum by (service) (otelcol_receiver_accepted_log_records{service=\"backend-collector-monitoring\"})",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "A",
+            "useBackend": false
+          }
+        ],
+        "title": "Received (Backend)",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "PEA2100DC89AE9FE2"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "blue",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 1200000
+                }
+              ]
+            },
+            "unitScale": true
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 5,
+          "x": 17,
+          "y": 1
+        },
+        "id": 3,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "10.3.4",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "PEA2100DC89AE9FE2"
+            },
+            "editorMode": "code",
+            "expr": "count_over_time({exporter=\"OTLP\"}[1h])",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "Logs Ingested - Last 15Min",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "PA58DA793C7250F1B"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
                   "color": "yellow",
                   "value": 600000
                 }
@@ -569,10 +632,10 @@ data:
           "overrides": []
         },
         "gridPos": {
-          "h": 12,
+          "h": 8,
           "w": 5,
-          "x": 5,
-          "y": 11
+          "x": 0,
+          "y": 9
         },
         "id": 2,
         "options": {
@@ -599,8 +662,8 @@ data:
               "uid": "PA58DA793C7250F1B"
             },
             "disableTextWrap": false,
-            "editorMode": "builder",
-            "expr": "otelcol_exporter_queue_capacity{service=\"local-collector-monitoring\"}",
+            "editorMode": "code",
+            "expr": "sum by (service) (otelcol_exporter_queue_capacity{service=\"local-collector-monitoring\"})",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
             "instant": false,
@@ -642,12 +705,12 @@ data:
           "overrides": []
         },
         "gridPos": {
-          "h": 12,
+          "h": 8,
           "w": 6,
-          "x": 10,
-          "y": 11
+          "x": 5,
+          "y": 9
         },
-        "id": 7,
+        "id": 9,
         "options": {
           "colorMode": "value",
           "graphMode": "area",
@@ -672,8 +735,8 @@ data:
               "uid": "PA58DA793C7250F1B"
             },
             "disableTextWrap": false,
-            "editorMode": "builder",
-            "expr": "otelcol_exporter_sent_log_records{service=\"backend-collector-monitoring\"}",
+            "editorMode": "code",
+            "expr": "sum by (service) (otelcol_exporter_sent_log_records{service=\"local-collector-monitoring\"})",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
             "instant": false,
@@ -683,28 +746,173 @@ data:
             "useBackend": false
           }
         ],
-        "title": "Logs Exported from Backend",
+        "title": "Exported",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "PA58DA793C7250F1B"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unitScale": true
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 6,
+          "x": 11,
+          "y": 9
+        },
+        "id": 10,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "10.3.4",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "PA58DA793C7250F1B"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "expr": "sum by (service) (otelcol_exporter_sent_log_records{service=\"backend-collector-monitoring\"})",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "A",
+            "useBackend": false
+          }
+        ],
+        "title": "Exported (Backend -> Loki)",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "PA58DA793C7250F1B"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "blue",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 1
+                }
+              ]
+            },
+            "unitScale": true
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 5,
+          "x": 17,
+          "y": 9
+        },
+        "id": 6,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "10.3.4",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "PA58DA793C7250F1B"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "expr": "sum by (service) (otelcol_exporter_send_failed_log_records{service=\"local-collector-monitoring\"})",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "A",
+            "useBackend": false
+          }
+        ],
+        "title": "Send Failed Logs",
         "type": "stat"
       }
-      ],
-      "refresh": "",
-      "schemaVersion": 39,
-      "tags": [],
-      "templating": {
-        "list": []
-      },
-      "time": {
-        "from": "now-15m",
-        "to": "now"
-      },
-      "timeRangeUpdatedDuringEditOrView": false,
-      "timepicker": {},
-      "timezone": "",
-      "title": "Rejekts 2024",
-      "uid": "fb8648c6-5488-4966-bda0-298c12512f2e",
-      "version": 19,
-      "weekStart": ""
-    }
+    ],
+    "refresh": "auto",
+    "schemaVersion": 39,
+    "tags": [],
+    "templating": {
+      "list": []
+    },
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "timeRangeUpdatedDuringEditOrView": false,
+    "timepicker": {},
+    "timezone": "",
+    "title": "Rejekts 2024",
+    "uid": "fb8648c6-5488-4966-bda0-298c12512f2e",
+    "version": 25,
+    "weekStart": ""
+      }
 kind: ConfigMap
 metadata:
   name: grafana-dashboards-demo
